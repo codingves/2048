@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2048</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="modal-container">
+      <section class="modal">
+        <img src="./images/game-over.jpeg" alt="Game Over!" />
+        <div class="modal-footer">
+          <button id="try-again" class="btn">try again</button>
+        </div>
+      </section>
+    </div>
+    <main>
+      <div class="row-1">
+        <h1>2048</h1>
+        <div class="scores">
+          <div class="score">
+            <p>score</p>
+            <p id="score">0</p>
+            <span id="added-score">+5</span>
+          </div>
+          <div class="score">
+            <p>best</p>
+            <p id="record"></p>
+          </div>
+        </div>
+      </div>
+      <div class="row-2">
+        <h3>play 2048 game online!</h3>
+        <div class="btn-container">
+          <button class="btn" id="new-game">new game</button>
+        </div>
+      </div>
+      <section id="grid"></section>
+    </main>
+  </body>
+</html>
