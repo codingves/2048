@@ -5,6 +5,10 @@ const modalContainer = document.querySelector(".modal-container");
 const tryAgainBtn = document.getElementById("try-again");
 const newGameBtn = document.getElementById("new-game");
 const recordElement = document.getElementById("record");
+const upBtn = document.getElementById("up-btn");
+const leftBtn = document.getElementById("left-btn");
+const downBtn = document.getElementById("down-btn");
+const rightBtn = document.getElementById("right-btn");
 
 let score;
 let record;
@@ -249,6 +253,23 @@ window.addEventListener("keydown", (e) => {
       break;
   }
 });
+
+upBtn.addEventListener("click", () => moveTiles(getColumns()));
+leftBtn.addEventListener("click", () => moveTiles(getRows()));
+downBtn.addEventListener("click", () =>
+  moveTiles(
+    getColumns().map((column) => {
+      return column.reverse();
+    })
+  )
+);
+rightBtn.addEventListener("click", () =>
+  moveTiles(
+    getRows().map((row) => {
+      return row.reverse();
+    })
+  )
+);
 
 createCells();
 startGame();
