@@ -143,6 +143,7 @@ const canMove = (_cells) => {
 const moveTiles = (_cells) => {
   let anyTileMoved = false;
   let addedScore = 0;
+  const willBeRemovedMergedTiles = [];
 
   _cells.forEach((cellArray) => {
     for (let i = 1; i < 4; i++) {
@@ -168,7 +169,7 @@ const moveTiles = (_cells) => {
             record = score;
             setRecord();
           }
-          cellArray[j].tile.element.remove();
+          willBeRemovedMergedTiles.push({ ...cellArray[j].tile, x: cellArray[j - 1].x, y: cellArray[j - 1].y });
           cellArray[j].tile = null;
           cellArray[j - 1].tile.element.classList.add("bounce");
         } else {
@@ -176,6 +177,11 @@ const moveTiles = (_cells) => {
           cellArray[j].tile = null;
         }
       }
+    }
+
+    for (const tile of willBeRemovedMergedTiles) {
+      tile.element.style.setProperty("--x", tile.x);
+      tile.element.style.setProperty("--y", tile.y);
     }
 
     for (const cell of cellArray) {
@@ -191,19 +197,27 @@ const moveTiles = (_cells) => {
     }
   });
 
+  console.log(cells);
+
   if (addedScore > 0) {
     addedScoreElement.textContent = `+${addedScore}`;
     addedScoreElement.classList.add("score-added");
   }
 
   if (anyTileMoved) {
-    createTile();
-
-    if (fullTile()) {
-      if (!canMove(getColumns()) && !canMove(getRows())) {
-        modalContainer.classList.add("show-modal");
+    setTimeout(() => {
+      for (const tile of willBeRemovedMergedTiles) {
+        tile.element.remove();
       }
-    }
+
+      createTile();
+
+      if (fullTile()) {
+        if (!canMove(getColumns()) && !canMove(getRows())) {
+          modalContainer.classList.add("show-modal");
+        }
+      }
+    }, 200);
   }
 };
 
