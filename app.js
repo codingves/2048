@@ -197,8 +197,6 @@ const moveTiles = (_cells) => {
     }
   });
 
-  console.log(cells);
-
   if (addedScore > 0) {
     addedScoreElement.textContent = `+${addedScore}`;
     addedScoreElement.classList.add("score-added");
